@@ -1,0 +1,55 @@
+GVS-Prüfungsstoff
+-----------------
+
+In der Klausur wird *nicht* programmiert.
+
+
+Kapitel 1: Einfuehrung
+- Entfällt: komplett, bis auf die Definition "Verteiltes System"
+
+Kapitel 2: Architekturen
+- Wichtig sind die Begriffe
+
+Kapitel 3: Grundlagen
+- Konzepte wichtig, es muss aber nicht programmiert werden
+
+Kapitel 4: Sockets
+- Konzepte wichtig, es muss aber nicht programmiert werden
+
+Kapitel 5: Remote Procedure Call
+- Konzepte wichtig, es muss aber nicht programmiert werden
+- Entfällt: REST, gRPC
+
+Kapitel 6: Distributed Shared Memory
+- alles wichtig
+- Entfällt: CXL, RDMA
+
+Kapitel 7: Zeit
+- Entfällt: Details zur Atomzeit, DCF77, GPS, NTP, Berkeley Verfahren
+
+Kapitel 8: Koordination
+- Entfällt: Wahl per Ring
+
+Kapitel 9: Replikation und Konsistenz
+- Entfällt: Linearisierbarkeit
+
+Kapitel 10: Fehlertoleranz
+- Alles relevant
+
+Kapitel 11: Eventual Consistency & Scaling Out: P2P-Systeme- Alles relevant
+
+Kapitel 12: Eventual Consistency & Scaling Out: Key-Value Storage
+- Entfällt: DXRAM
+
+Kapitel 13: Eventual Consistency & Scaling Out: Google File System (GFS)- Alles relevant
+- Entfällt: Zustände consistent, inconsistent, defined, undefined
+
+Kapitel 14: Strong Consistency & Scaling Out: Transaktionen- Alles relevant
+
+Kapitel 15: Strong Consistency & Scaling Out: Konsensus
+- Entfällt: Chubby Lock Service, 2PC
+
+Kapitel 16: Sicherheit in verteilten Systemen
+- Alles relevant
+
+
