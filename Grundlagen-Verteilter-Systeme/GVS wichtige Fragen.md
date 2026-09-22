@@ -1,3 +1,4 @@
+
 ## 1. Einführung (3P)
 ### Klausur-SS25
 3x Klausur2-SS24, Klausur1-SS24
@@ -5,11 +6,29 @@
 Eine Sammlung unabhängiger Computer, die den Benutzern als ein einziger Computer erscheinen.
 durch Netzwerk verbunden und gemeinsam eine Aufgabe lösen.
 ## 2. Architekturen (3P)
-- Peer-to-Peer (P2P): Jeder Rechner ist gleichzeitig Informationsanbieter und –konsument
-- Client-Server: 
-	- Client -> Anfrage -> Server (Informationsanbieter)-> Antwort -> Client (Konsument)
+
+| Peer-to-Peer                                                       | Client-Server                                            |
+| ------------------------------------------------------------------ | -------------------------------------------------------- |
+| Jeder Rechner ist gleichzeitig Informationsanbieter und –konsument | Server als Informationsanbieter und Client als Konsument |
+| Hohe Ausfallsicherheit                                             | Anfrage & Antwort                                        |
+|                                                                    | + single point of truth                                  |
+|                                                                    | - single point of failure                                |
+
+- **Cluster:**  lokale Vernetzung von Einzelrechnern über ein schnelles Ethernet-Netzwerk (Räumlich konzentriert)
+	- + Inkrementell einfach erweiterbar 
+- **High Performance Computing (HPC):** sehr große Rechenleistung, viele Cores & schnelle Netzwerke. Meist für wissenschaftliche Simulationen
+- **Service-Oriented Architecture (SOA):** große Anwendung in mehrere unabhängige Services aufgeteilt wird.
+	- + lose Kopplung zwischen Services 
+- **Cloud Computing:**  Bündelung der Rechenleistung und Speicherplatz an zentraler Stelle
+	- + bedarfsgesteuerte Bereitstellung von Ressourcen (Rechenleistung, Speicher) über das Internet.
+	- + Daten sind überall verfügbar
+- **Edge-Computing:** Daten direkt am Rand des Netzwerks (in unmittelbarer Nähe zur Datenquelle) verarbeitet.
+	- + Bandbreite sparen
+	- + Latenzzeiten minimieren
+- **Batch processing:** große Datenmengen werden gesammelt und zeitverzögert in Blöcken verarbeitet, 
+- **Stream Processing:** die eintreffenden Daten werden kontinuierlich und in Echtzeit ausgewertet.
 Service-Oriented Architecture, Cluster, Cloud Computing, High Performance Computing,
-Edge-Computing, Batch vs. Stream processingd
+Edge-Computing, Batch vs. Stream processing
 ### Klausur2-SS23
 ![[Pasted image 20260721142125.png]]
 ### Klausur1-SS23
@@ -17,29 +36,42 @@ Edge-Computing, Batch vs. Stream processingd
 ![[Pasted image 20260721151732.png]]
 
 ## 3. Grundlagen (4P)
-Wettlaufsituation (engl. race condition): wenn nebenläufige Threads eines Prozesses auf gemeinsame Variablen schreiben, so ist das Ergebnis nicht deterministisch
+
+| **Prozess**                      | **Thread**                                                                                                                                                                                                                                             |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ein Programm in Ausführung       | ausführende Einheit (Ausführungsstrang) innerhalb eines Prozesses                                                                                                                                                                                      |
+| Hat eigenen Adressraum           | Alle Threads innerhalb desselben Prozesses teilen sich den gleichen Speicherbereich, offene Dateien & Geräte                                                                                                                                           |
+| Kommunikation: IPC               | direkt über den gemeinsamen Speicher                                                                                                                                                                                                                   |
+| Prozesserzeugung ist aufwändig   | Context-Switching Overhead                                                                                                                                                                                                                             |
+| kann aus vielen Threads bestehen | **Wettlaufsituation (race condition):** wenn nebenläufige Threads eines Prozesses auf gemeinsame Variablen schreiben, so ist das Ergebnis nicht deterministisch                                                                                        |
+|                                  | **Lost Update:** entsteht, wenn mehrere Threads gleichzeitig auf eine gemeinsame Variable schreibend zugreifen und eine Änderung eines Threads von einem anderen überschrieben wird <br>**Vermeidung:** Synchronisierung, kritische Abschnitte Sperren |
+|                                  |                                                                                                                                                                                                                                                        |
+
 ### Klausur1-SS26
-zwei Threads gleichzeitig auf eine gemeinsame Variable schreibend zugreifen, dass eine Schreiboperation von einem der zwei Threads verloren geht. 
-Vermeidung: Synchronisierung, kritische Abschnitte Sperren
 ![[Pasted image 20260819153606.png]]
 ### Klausur-SS25
 ![[Pasted image 20260708190647.png]]
 ## 4. Sockets (16P)
-- socket: door between application process and end-end-transport protocol Kommunikationsendpunkte
-- 
+**Socket:** eine Art Kommunikationsschnittstelle, über die zwei Programme Daten über ein Netzwerk austauschen können
+**IP:** Adressierung eines Servers
+**Port-Nummer:** Identifikation eines bestimmten Diensts 
+**reservierte Ports:**  HTTP: 80,  SSH: 20
 
-| TCP Segment                                             | UDP Datagram                            |
+| **TCP Segment**                                         | **UDP Datagram**                        |
 | ------------------------------------------------------- | --------------------------------------- |
 | Verbindung zwischen zwei Endpunkten                     | Verbindungslos                          |
-| Erhält Sequenz der Nachrichten                          | Nachrichtensequenz nicht garantiert     |
+| Pakete kommen in der richtigen Reihenfolge an           | Reihenfolge nicht garantiert            |
 | Verlorene Nachrichten werden automatisch neu übertragen | Keine Fluss- und Verstopfungskontrolle  |
 | Flusskontrolle, Verstopfungskontrolle                   | Beispiele: Video- und Audioströme, tftp |
 | Beispiele: https, ssh, sftp, X11                        |                                         |
 
-IP: Adressierung
-Port-Nummer: Identifikation eines bestimmten Diensts 
-Beispiele reservierter Ports: 80 HTTP 22 SSH
 
+#### Thread-per-Client
+Nachteile:
+ - Hoher Speicherverbrauch (Memory Overhead)
+ - Erzeugen und Beenden von Threads kostet auch Zeit
+ - Teure Kontextwechsel
+ - Ressourcenverschwendung durch blockierendes I/O
 #### Load-Balancer
 Nutzer effizient und gleichmäßig auf mehrere Server zu verteilen
 Einsatz mehrerer Server, aber alle Clients bekommen durch einen Load-Balancer einen Server zugeteilt, an den sie ihre Anfragen schicken
@@ -52,6 +84,10 @@ Nachteile:
 - Ereignisgetriebene Logik (ähnlich einem Zustandsautomat) muss nicht-blockieren realisiert werden → Sperren vermeiden
 
 
+- **Thread-per-Client:** Für jede eingehende Client-Verbindung erstellt das Betriebssystem sofort einen komplett neuen, eigenständigen Thread. Dieser Thread ist ausschließlich für diesen einen Client zuständig, wartet aktiv auf dessen Anfragen, verarbeitet diese und wird erst wieder aus dem Speicher gelöscht, wenn die Verbindung beendet wird.
+- **Thread Pool:** Der Server erzeugt beim Start eine feste Anzahl an Threads, die dauerhaft am Leben erhalten werden. Eingehende Client-Anfragen landen in einer zentralen Warteschlange; der nächste freie Thread greift sich eine Aufgabe, arbeitet sie ab und kehrt danach in den Pool zurück, um die nächste Anfrage aus der Schlange zu übernehmen.
+- **Asynchrone Sockets (Event-Driven):** Ein zentraler Thread (die Event-Loop) überwacht tausende Verbindungen gleichzeitig, ohne jemals auf eine einzelne zu warten. Erst wenn das Betriebssystem aktiv meldet, dass bei einem bestimmten Socket ein Ereignis stattgefunden hat (z. B. "Daten sind eingetroffen"), verarbeitet die Event-Loop dieses Paket sofort und springt danach nahtlos zum nächsten aktiven Socket
+
 ### Klausur-SS25
 ![[Pasted image 20260708191822.png]]
 ![[Pasted image 20260708193615.png]]
@@ -60,14 +96,14 @@ C)
 - Ein Thread in einer 64-Bit JVM belegt ca. 1 MB (auch wenn er inaktiv ist) 
 - Erzeugen und Beenden von Threads kostet auch Zeit
 - Viele Threads belasten auch den Scheduler
-- Lösung asynchrone Sockets, Load-Balancer
+- Lösung asynchrone Sockets, Load-Balancer, Thread Pool
 ### Klausur2-SS24
 ![[Pasted image 20260710192756.png]]
 ![[Pasted image 20260710193901.png]]
 ### Klausur2-SS23
 ![[Pasted image 20260721143900.png]]
 ![[Pasted image 20260721143930.png]]
-b) Asynchrone TCP-Sockets sind sinnvoll, **wenn ein Programm gleichzeitig andere Aufgaben ausführen soll, während es auf Netzwerkdaten wartet**. (bei stark I/O-Operationen mit viel Warten)
+b) Asynchrone TCP-Sockets sind sinnvoll bei I/O-Operationen mit viel Warten.
 Mit asynchronen Sockets kann das Programm währenddessen weiterarbeiten bzw. andere Verbindungen bearbeiten.
 ### Klausur1-SS23
 ![[Pasted image 20260721151816.png]]
@@ -323,24 +359,84 @@ a)
 ## 12. Eventual Consistency & Scaling Out: Key-Value Storage (31P)
 ### Klausur-SS25
 ![[Pasted image 20260708201721.png]]
+a) gleichmäßigere Lastverteilung
+jeder physischer Server hat die Rolle von **mehreren "virtuellen Knoten"** 
+
 ![[Pasted image 20260708201758.png]]
 ![[Pasted image 20260708201820.png]]
+c) 
+
+|       |                                                                                                                               |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **N** | Dauerhaftigkeit der Daten (Gesamtzahl der Knoten)                                                                             |
+| **W** | Schreibquorum. Die Mindestanzahl an Knoten, die einen Schreibvorgang erfolgreich bestätigen müssen, damit er als gültig gilt. |
+| **R** | Lesequorum. Die Mindestanzahl an Knoten, die bei einem Lesevorgang abgefragt werden müssen, um einen Wert zurückzugeben.      |
+|       |                                                                                                                               |
+Damit sehen Lesezugriffe im fehlerfreien Fall immer die letzte Aktualisierung
 ### Klausur2-SS24
 ![[Pasted image 20260710232401.png]]
 ### Klausur1-SS24
 ![[Pasted image 20260711000825.png]]
+b) Als Versionsnummer für das Auflösen von Inkonsistenzen.
+Versionsverwaltung von Datensätzen und zur Erkennung von Konflikten
+
+**Unterschiede:** 
+- **Vektorzeit-Größenbeschränkung**  Dynamo begrenzt die maximale Größe (z. B. auf 10 Einträge). 
+- 
+- 
+ **Konsequenzen**: Wird das Limit der Vektorzeit überschritten, wird der älteste Eintrag gelöscht. Wodurch manche Inkonsistenzen nicht mehr erkannt werden können
 ### Klausur1-SS23
 ![[Pasted image 20260721154321.png]]
 ## 13. Eventual Consistency & Scaling Out: Google File System (GFS) (12P)
 ### Klausur2-SS24
 ![[Pasted image 20260710200246.png]]
+a)
+- Koordiniert Zugriffe auf Dateien
+- Verwaltet Metadaten von Dateien
+- Ist zuständig für die Erzeugung und (Re-)Replikation von Chunks
+- Periodisch werden Checkpoints gespeichert
+**Lösung:**  selten kontaktieren. Master wird nur für Metadaten-Anfragen kontaktiert.
+
+
+
+Problem: Single-Point-Of-Failure -> Lösung: es werden Shadow-Master verwendet
+▪ Problem: Bottleneck -> Lösung: GFS ist so gebaut, dass der Master nur selten
+kontaktiert wird.
 ![[Pasted image 20260710200353.png]]
+b) 
+- GFS-Client schickt Anfrage an den Master.
+- Master antwortet mit Chunk-Handle und den Replikat-Orten
+- Client überträgt die zu schreibenden Daten an das nächste Replikat
+- Danach schickt der Client den Schreib-Befehl an die Primärkopie, nachdem alle Daten übertragen wurden
+- Primärkopie bestimmt die serielle Ordnung von Updates und schreibt diese in den lokalen Chunk
+- Anschließend fordert die Primärkopie die anderen Replikate auf, die Updates in der gleichen Reihen- folge zu schreiben
+- Alle Replikate melden das erfolgreiche Schreiben zurück an die Primärkopie
+- Die Primärkopie informiert dann den Client
+![[Pasted image 20260831195706.png]]
+
 ![[Pasted image 20260710200326.png]]
+c)
+**Semantik der Operation:** Die "record append"-Operation fügt einen Record atomar an das Ende einer Datei an und garantiert dabei, dass dies mindestens ein Mal erfolgreich geschieht.
+
+**Inkonsistenzen in den Replikaten:** Da Schreibvorgänge vom Client wiederholt werden, wenn ein Fehler bei einem Replikat auftritt oder die Daten nicht in den aktuellen Chunk passen, können in den Replikaten Inkonsistenzen wie doppelte Datensätze (Duplikate) oder leere Fülldaten (Padding) entstehen.
+
+**Erkennung und Auflösung durch die Anwendung:** Da GFS ein abgeschwächtes Konsistenzmodell nutzt, muss die Anwendung diese Inkonsistenzen selbst handhaben:
+
+- **Self-identifying records:** Die Anwendung speichert eine selbstgenerierte ID im Datensatz ab. Dadurch kann sie doppelte Einträge beim Lesen eindeutig identifizieren und einfach überspringen.
+    
+- **Self-validating chunks:** Padding-Bereiche, die zum Auffüllen von Chunks genutzt wurden, können von der Anwendung anhand von Checksums erkannt werden.
+
 ### Klausur1-SS24
 ![[Pasted image 20260711001020.png]]
 ## 14. Strong Consistency & Scaling Out: Transaktionen (34P)
 ### Klausur1-SS26
 ![[Pasted image 20260819211543.png]]
+a) 
+- Gefahr von Cascading-Aborts bei Abbruch 
+- Verklemmungen können auftreten 
+b)
+Beim viel lesen wenig (parallel) schreiben 
+Wenn **Konflikte selten** sind und Transaktionen zurückgesetzt werden können.
 ### Klausur1-SS24
 ![[Pasted image 20260711001331.png]]
 ![[Pasted image 20260711001748.png]]
@@ -352,6 +448,7 @@ a)
 ![[Pasted image 20260721153330.png]]
 ![[Pasted image 20260721153406.png]]
 ## 15. Strong Consistency & Scaling Out: Konsensus (58P)
+**FLP-Theorem** besagt, dass in einem asynchronen System keinen total korrekten Einigungsalgorithmus gibt
 ### Klausur1-SS26
 ![[Pasted image 20260819211224.png]]
 ### Klausur-SS25
@@ -364,6 +461,8 @@ a)
 ![[Pasted image 20260711003334.png]]
 ### Klausur2-SS23
 ![[Pasted image 20260721145612.png]]
+d) **FLP-Theorem** besagt, dass in einem asynchronen System keinen total korrekten Einigungsalgorithmus gibt.
+Der sync-Ansatz ist blockierend and langsam.
 ![[Pasted image 20260721154559.png]]
 
 ## 16. Sicherheit (46P)
