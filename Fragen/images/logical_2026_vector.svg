@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L9,3 z" fill="#222"/>
+  </marker>
+  <style>
+    .title { font: 700 28px Arial, sans-serif; fill:#111; }
+    .label { font: 600 21px Arial, sans-serif; fill:#111; }
+    .small { font: 18px Arial, sans-serif; fill:#222; }
+    .tiny { font: 15px Arial, sans-serif; fill:#333; }
+    .line { stroke:#222; stroke-width:2.2; }
+    .msg { stroke:#222; stroke-width:2.2; marker-end:url(#arrow); }
+    .box { fill:#f7f9fb; stroke:#222; stroke-width:2; rx:10; }
+    .accent { fill:#eaf3fb; stroke:#222; stroke-width:2; rx:10; }
+  </style>
+</defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="600.0" y="42" text-anchor="middle" class="title">Vektorzeiten: Ereignisse und Nachrichten</text>
+<text x="40" y="112.0" class="label">Prozess A</text>
+<line x1="170" y1="105.0" x2="1155" y2="105.0" class="line"/>
+<text x="40" y="249.5" class="label">Prozess B</text>
+<line x1="170" y1="242.5" x2="1155" y2="242.5" class="line"/>
+<text x="40" y="387.0" class="label">Prozess C</text>
+<line x1="170" y1="380.0" x2="1155" y2="380.0" class="line"/>
+<line x1="250" y1="105.0" x2="390" y2="242.5" class="msg"/>
+<text x="320.0" y="164.75" text-anchor="middle" class="tiny">A1 → B1</text>
+<line x1="500" y1="242.5" x2="650" y2="380.0" class="msg"/>
+<text x="575.0" y="302.25" text-anchor="middle" class="tiny">B2 → C2</text>
+<line x1="730" y1="380.0" x2="880" y2="105.0" class="msg"/>
+<text x="805.0" y="233.5" text-anchor="middle" class="tiny">C3 → A3</text>
+<line x1="900" y1="105.0" x2="1010" y2="242.5" class="msg"/>
+<text x="955.0" y="164.75" text-anchor="middle" class="tiny">A3 → B4</text>
+<text x="600" y="405" text-anchor="middle" class="small">Lokal: eigene Komponente +1. Empfang: komponentenweise Maximum, danach eigene Komponente +1.</text></svg>

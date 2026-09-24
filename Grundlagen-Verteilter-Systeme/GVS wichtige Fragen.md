@@ -1,4 +1,4 @@
-
+![[Pasted image 20260922121718.png]]
 ## 1. Einführung (3P)
 ### Klausur-SS25
 3x Klausur2-SS24, Klausur1-SS24
@@ -53,8 +53,8 @@ Edge-Computing, Batch vs. Stream processing
 ![[Pasted image 20260708190647.png]]
 ## 4. Sockets (16P)
 **Socket:** eine Art Kommunikationsschnittstelle, über die zwei Programme Daten über ein Netzwerk austauschen können
-**IP:** Adressierung eines Servers
-**Port-Nummer:** Identifikation eines bestimmten Diensts 
+**IP:** Adressierung des Servers
+**Port-Nummer:** Identifikation eines bestimmten Diensts auf dem Server
 **reservierte Ports:**  HTTP: 80,  SSH: 20
 
 | **TCP Segment**                                         | **UDP Datagram**                        |
@@ -74,7 +74,7 @@ Nachteile:
  - Ressourcenverschwendung durch blockierendes I/O
 #### Load-Balancer
 Nutzer effizient und gleichmäßig auf mehrere Server zu verteilen
-Einsatz mehrerer Server, aber alle Clients bekommen durch einen Load-Balancer einen Server zugeteilt, an den sie ihre Anfragen schicken
+Clients bekommen einen Server zugeteilt, an den sie ihre Anfragen schicken
 Nachteile: 
 - Funktioniert so einfach nur, wenn jeder Server jede Anfrage beantworten kann ( replizierte Zustände).
 - single point of failure
@@ -116,7 +116,7 @@ Mit asynchronen Sockets kann das Programm währenddessen weiterarbeiten bzw. and
 - **Schnittstelle:** Eine sprach- und plattformunabhängige *Beschreibung der aufrufbaren Funktionen*
 - **Stub (Client-Seite):** Er setzt den Aufruf in einen Nachrichtenaustausch um, verpackt (Marshalling) die Aufrufparameter und entpackt (Unmarshalling) den Rückgabewert.
 - **Skeleton (Server-Seite):**  Es entpackt die Aufrufparameter, gibt sie an den Server weiter, und verpackt nach der Ausführung den Rückgabewert in eine Nachricht.
-- **Namensdienst (optional):** Der Server macht dort seinen Dienst bekannt.
+- **Namensdienst (optional):** Der Server macht seinen Dienst bekannt.
 
 Problem: Umsetzung von **Call-by-Reference** 
 - Client und Server haben keinen gemeinsamen Speicher 
@@ -149,6 +149,8 @@ b) Da Client und Server keinen gemeinsamen Speicher besitzen, muss die Parameter
 - **Referenzen (Zeiger):** Entweder wird eine vollständige *Kopie des referenzierten* **(flachgeklopft)** Objekts inklusive aller Unterobjekte übertragen, oder es wird ein *systemweit eindeutiger Zeiger* **(Remote-Referenz)** verwendet.
 ### Klausur2-SS24
 ![[Pasted image 20260710194432.png]]
+b) bekommt der Client-Stub 
+
 b) 
 1. Client-Stub sendet einen Fernaufruf und wartet bestimmte Zeit auf eine Antwort vom Server. Falls in dieser Zeit keine Antwort vom Server eingeht, wird der Aufruf wiederholt.
 2. Dies ist kritisch bei schreibenden Operationen mit Seiteneffekten, da der Server einen Aufruf möglicherweise mehrfach ausführt.
@@ -198,10 +200,12 @@ a) Speicherzugriffserkennung erfolgt hier pro Speicherseite
 Page-Hit -> Zugriff im lokalen Speicher
 Page-Fault -> die fehlende Seite anfordern per Multicast
 ## 7. Logische Zeit (68P)
-- **Berkeley Verfahren** (aktiv): 
-	- Server erfragt Zeit bei allen Clients
-	- berechnet Durchschnitt der Abweichungen 
-	- Individuelle Korrekturwerte berechnen und versenden
+>[!warning] klausurirrelevant
+> **Berkeley Verfahren** (aktiv): 
+> - Server erfragt Zeit bei allen Clients
+> - berechnet Durchschnitt der Abweichungen 
+> - Individuelle Korrekturwerte berechnen und versenden
+
 - **Cristian Verfahren (Passiver zentraler Zeitserver):**
 	- Periodische Anfragen der Klienten an den Zeitserver
 	- Antwort des Zeitservers, eventuell mit Mittelwertbildung
@@ -454,6 +458,9 @@ Wenn **Konflikte selten** sind und Transaktionen zurückgesetzt werden können.
 ### Klausur-SS25
 ![[Pasted image 20260708203129.png]]
 ![[Pasted image 20260708203258.png]]
+
+![[Pasted image 20260922142959.png]]
+
 ### Klausur2-SS24
 ![[Pasted image 20260710233845.png]]
 ![[Pasted image 20260710233921.png]]
